@@ -4,48 +4,57 @@
   <meta charset="UTF-8">
   <title>SXMRXXT | Quantum AI Console</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Quantum AI Console | Encrypted Logs">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@500&display=swap');
-    html, body {
+    body {
+      background: #101416;
+        overflow: hidden;
+      color: #00ff62;
+      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+      min-height: 100vh;
       margin: 0;
       padding: 0;
-      background: #090c10;
-      color: #39ff14;
-      font-family: 'Fira Mono', monospace;
-      height: 100%;
+      letter-spacing: 0.02em;
     }
     .terminal {
-      background: rgba(15,20,30,0.96);
-      border: 2px solid #222;
-      box-shadow: 0 0 40px #39ff14a0;
-      border-radius: 8px;
-      max-width: 97vw;
-      width: 400px;
-      margin: 10vh auto 0 auto;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+      background: #161d23;
+      border-radius: 14px;
+      box-shadow: 0 0 48px #00ff2a30, 0 0 0 #0000;
+      padding: 0 0 8px 0;
+      margin: 0 auto;
+      min-width: 350px;
+      max-width: 520px;
+      margin-top: 12vh;
+      position: relative;
+      z-index: 2;
     }
     .term-header {
-      background: #14181f;
-      color: #39ff14;
-      font-size: 1.1rem;
-      padding: 12px 18px 7px 18px;
-      border-bottom: 1px solid #222;
-      letter-spacing: 1.5px;
+      background: #162b1e;
+      color: #59ffae;
+      font-weight: bold;
+      font-size: 1.12rem;
+      padding: 18px 18px 13px 18px;
+      border-radius: 14px 14px 0 0;
+      border-bottom: 1px solid #00ff1a33;
+      letter-spacing: 0.04em;
     }
     .term-body {
-      padding: 24px 18px;
-      min-height: 120px;
-    }
-    #verify-text {
-      text-align: center;
+      padding: 24px 18px 16px 18px;
       font-size: 1.1rem;
-      margin-bottom: 12px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 34px;
+      color: #ff245b;
+      font-size: 1.03rem;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      letter-spacing: 0.02em;
+      text-shadow: 0 0 6px #ff245b21;
     }
     .progress-bar-outer {
       width: 100%;
+      max-width: 320px;
+      margin: 22px auto 0 auto;
       background: #0e1b11;
       height: 15px;
       border-radius: 9px;
@@ -65,43 +74,116 @@
       font-size: 1.07rem;
       margin-top: 7px;
       text-align: center;
-      font-weight: bold;
+      letter-spacing: 0.05em;
+      font-family: inherit;
       text-shadow: 0 0 6px #13fff0aa;
-    }
-    .footer {
-      text-align: center;
-      margin-top: 18px;
-      color: #ff003c;
-      font-size: 0.93rem;
-      letter-spacing: 1px;
-      font-family: 'Fira Mono', monospace;
-      opacity: 0.87;
-    }
-    #typewriter {
-      max-height: 300px;
-      overflow-y: auto;
-      white-space: pre-line;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      padding-right: 6px;
+      font-weight: bold;
+      user-select: none;
     }
     .blinking {
-      animation: blinker 1s linear infinite;
+      animation: blink-ani 1.35s steps(1) infinite;
     }
-    @keyframes blinker {
-      50% { opacity: 0.4; }
+    @keyframes blink-ani {
+      0% { opacity: 1; }
+      50% { opacity: 0.30; }
+      100% { opacity: 1; }
     }
+    .interview-box {
+      max-width: 900px;
+      margin: 40px auto;
+        position: fixed;
+  top: 12vh;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 76vh;
+  overflow-y: auto;
+  z-index: 99;
+
+      background: #232323;
+      box-shadow: 0 4px 32px #0008;
+      border-radius: 8px;
+      padding: 40px 40px 50px 40px;
+      font-size: 1.13rem;
+      letter-spacing: 0.02em;
+      color: #e0e0e0;
+      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+      line-height: 1.6;
+      display: none;
+    }
+    .interview-title {
+      text-align: center;
+      font-size: 2.1rem;
+      margin-bottom: 1.5em;
+      letter-spacing: 0.05em;
+      font-family: 'Fira Mono', monospace;
+      font-weight: bold;
+      /* gorgeous blue-pink-ish gradient */
+      background: linear-gradient(92deg, #1e88ff 0%, #8e3fff 50%, #ff2877 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      filter: drop-shadow(0 2px 18px #2779ffcc);
+      animation: titleglow 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes titleglow {
+      0% { filter: drop-shadow(0 2px 18px #2779ffcc); }
+      100% { filter: drop-shadow(0 2px 28px #ff2877cc); }
+    }
+    .typewriter {
+      white-space: pre-line;
+      border-left: 3px solid #91f2c1;
+      padding-left: 18px;
+      min-height: 250px;
+      font-size: 1.13rem;
+      background: transparent;
+      animation: glow-border 1.2s alternate infinite;
+    }
+    @keyframes glow-border {
+      0% { border-left-color: #91f2c1; }
+      100% { border-left-color: #3fffe0; }
+    }
+    .highlight-maschine { color: #ffe066; font-weight: bold; }
+    .highlight-protools { color: #ffe066; font-weight: bold; }
+    .interviewer { color: #91f2c1; font-weight: bold; }
+    .artist { color: #ffa1ff; font-weight: bold; }
+    /* Scrollbar styles — global */
+.interview-box::-webkit-scrollbar {
+  width: 6px;
+}
+.interview-box::-webkit-scrollbar-thumb {
+  background: #13fff0aa;
+  border-radius: 3px;
+}
+
+/* Responsive tweaks for small screens */
+@media (max-width: 600px) {
+  .interview-box {
+    padding: 24px 8px;
+  }
+  .interview-title {
+    font-size: 1.2rem;
+  }
+  .typewriter {
+    font-size: 0.98rem;
+    padding-left: 10px;
+  }
+  .loader-container {
+    margin-top: 70px;
+  }
+}
   </style>
 </head>
 <body>
-  <!-- Glitch Sound -->
-  <audio id="glitch-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3e3b6f5b4a.mp3?filename=glitch-1-110277.mp3" preload="auto"></audio>
-
+  <!-- VERIFY SCREEN -->
   <div id="verify-screen">
     <div class="terminal">
       <div class="term-header">SXMRXXT :: Quantum AI Console</div>
       <div class="term-body">
-        <div id="verify-text" class="blinking">Verifying your browser...</div>
+        <pre id="verify-text" class="blinking">
+Verifying your browser...
+        </pre>
+        <!-- Progress Bar -->
         <div class="progress-bar-outer">
           <div class="progress-bar-inner" id="progress-bar"></div>
         </div>
@@ -111,37 +193,34 @@
     <div class="footer">Private access only. Level 5 Clearance Required.</div>
   </div>
 
-  <div class="terminal" id="interview-screen" style="display:none;">
-    <div class="term-header">SXMRXXT :: Interview Feed</div>
-    <div class="term-body">
-      <div id="typewriter"></div>
+  <!-- INTERVIEW SCREEN -->
+  <div class="interview-box" id="interview-box">
+    <div class="interview-title">
+      Inside the Glitch: An Interview with SXMRXXT
     </div>
+    <div id="typewriter" class="typewriter"></div>
   </div>
 
   <script>
+    // Progress Bar Logic
     const progressBar = document.getElementById('progress-bar');
     const progressPercent = document.getElementById('progress-percent');
-    const glitchSound = document.getElementById('glitch-sound');
-
     let prog = 0;
-    const duration = 10000;
+    const duration = 10000; // 10 sec
     const interval = 50;
     const totalSteps = duration / interval;
     let currentStep = 0;
-
-    const progressTimer = setInterval(() => {
+    let progressTimer = setInterval(() => {
       currentStep++;
-      prog = Math.min(100, Math.round((currentStep / totalSteps) * 100));
+      prog = Math.min(100, Math.round((currentStep/totalSteps)*100));
       progressBar.style.width = prog + "%";
       progressPercent.textContent = prog + "%";
       if (currentStep >= totalSteps) {
         clearInterval(progressTimer);
-        document.getElementById('verify-screen').style.display = 'none';
-        document.getElementById('interview-screen').style.display = 'block';
-        typeLine();
       }
     }, interval);
 
+    // Interview lines (with color classes)
     const interviewLines = [
 "<span class='interviewer'>Interviewer:</span> What do you use to make music?",
       "<span class='artist'>SXMRXXT:</span> <span class='highlight'>Maschine</span> to create grooves, loops, and sample-driven patterns",
@@ -251,7 +330,8 @@
       "<span class='artist'>SXMRXXT:</span> Fragmented."
     ];
 
-let currentLine = 0;
+    // Typewriter effect
+    let currentLine = 0;
     let currentChar = 0;
     let output = '';
     const typingSpeed = 22;
@@ -260,24 +340,34 @@ let currentLine = 0;
     function typeLine() {
       const typewriterDiv = document.getElementById('typewriter');
       if (currentLine >= interviewLines.length) return;
+
       let line = interviewLines[currentLine];
       if (currentChar < line.length) {
         output += line[currentChar];
         typewriterDiv.innerHTML = output + '<span style="opacity:.6;">|</span>';
         currentChar++;
-        typewriterDiv.scrollTop = typewriterDiv.scrollHeight;
-        glitchSound.currentTime = 0;
-        glitchSound.play();
         setTimeout(typeLine, typingSpeed);
       } else {
         output += '<br>';
         typewriterDiv.innerHTML = output;
         currentLine++;
         currentChar = 0;
-        typewriterDiv.scrollTop = typewriterDiv.scrollHeight;
         setTimeout(typeLine, linePause);
       }
     }
+
+    // Switch to interview after 10s
+setTimeout(() => {
+  const box = document.getElementById('interview-box');
+  document.getElementById('verify-screen').style.display = 'none';
+  box.style.display = 'block';
+  box.style.opacity = '0';
+  box.style.transition = 'opacity 1.2s ease';
+  setTimeout(() => {
+    box.style.opacity = '1';
+    typeLine();
+  }, 100);
+}, 10000);
   </script>
 </body>
 </html>
