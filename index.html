@@ -232,6 +232,36 @@ Verifying your browser...
 
   <script>
     // Progress Bar Logic
+    // Interview lines (with color classes)
+const interviewLines = [
+  "<span class='interviewer'>Interviewer:</span> What do you use to make music?",
+  "<span class='artist'>SXMRXXT:</span> <span class='highlight-maschine'>Maschine</span> to create grooves, loops, and sample-driven patterns",
+  "<span class='artist'>SXMRXXT:</span> <span class='highlight-protools'>Pro Tools</span> for recording vocals, mixing, and final output",
+  "<span class='interviewer'>Interviewer:</span> What drives your sound?",
+  "<span class='artist'>SXMRXXT:</span> Glitch, mystery, and encrypted emotion.",
+  "<span class='interviewer'>Interviewer:</span> Final message?",
+  "<span class='artist'>SXMRXXT:</span> The console is alive. Listen closely."
+];
+
+// Show interview box and animate typewriter
+setTimeout(() => {
+  document.getElementById('verify-screen').style.display = 'none';
+  const interviewBox = document.getElementById('interview-box');
+  const typewriter = document.getElementById('typewriter');
+  interviewBox.style.display = 'block';
+
+  let i = 0;
+  const typeSpeed = 120;
+  function typeLine() {
+    if (i < interviewLines.length) {
+      typewriter.innerHTML += interviewLines[i] + "<br><br>";
+      typewriter.scrollTop = typewriter.scrollHeight; // auto-scroll
+      i++;
+      setTimeout(typeLine, typeSpeed);
+    }
+  }
+  typeLine();
+}, duration + 500); // wait for progress bar to finish
     const progressBar = document.getElementById('progress-bar');
     const progressPercent = document.getElementById('progress-percent');
     let prog = 0;
