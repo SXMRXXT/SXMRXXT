@@ -9,7 +9,7 @@
     *, *::before, *::after {
   box-sizing: inherit;
 }
-    body {
+body {
   background: #101416;
   overflow: hidden;
   color: #00ff62;
@@ -161,24 +161,27 @@ overflow-y: auto;
   background: #13fff0aa;
   border-radius: 3px;
 }
-
 @media (max-width: 600px) {
   .interview-box {
-    padding: 16px 12px;
-    height: 78vh;
-    width: 92vw;
+    position: fixed;
+    top: 10vh;
     left: 50%;
     transform: translateX(-50%);
+    width: 92vw;
+    height: 76vh;
+    padding: 18px 12px;
+    overflow-y: auto;
+    box-sizing: border-box;
   }
   .interview-title {
     font-size: 1.4rem;
+    text-align: center;
   }
   .typewriter {
     font-size: 1rem;
     padding-left: 12px;
-  }
-  .loader-container {
-    margin-top: 60px;
+    max-height: 60vh;
+    overflow-y: auto;
   }
 }
   </style>
