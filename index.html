@@ -108,6 +108,7 @@
       letter-spacing: 0.05em;
       font-family: 'Fira Mono', monospace;
       font-weight: bold;
+      /* gorgeous blue-pink-ish gradient */
       background: linear-gradient(92deg, #1e88ff 0%, #8e3fff 50%, #ff2877 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -119,11 +120,6 @@
     @keyframes titleglow {
       0% { filter: drop-shadow(0 2px 18px #2779ffcc); }
       100% { filter: drop-shadow(0 2px 28px #ff2877cc); }
-    }
-    #typewriter-container {
-      max-height: 70vh;
-      overflow-y: auto;
-      scroll-behavior: smooth;
     }
     .typewriter {
       white-space: pre-line;
@@ -138,13 +134,15 @@
       0% { border-left-color: #91f2c1; }
       100% { border-left-color: #3fffe0; }
     }
-    .highlight-maschine, .highlight-protools, .highlight { color: #ffe066; font-weight: bold; }
+    .highlight-maschine { color: #ffe066; font-weight: bold; }
+    .highlight-protools { color: #ffe066; font-weight: bold; }
     .interviewer { color: #91f2c1; font-weight: bold; }
     .artist { color: #ffa1ff; font-weight: bold; }
     @media (max-width: 600px) {
       .interview-box { padding: 24px 8px; }
       .interview-title { font-size: 1.2rem; }
       .typewriter { font-size: 0.98rem; padding-left: 10px; }
+      .loader-container { margin-top: 70px; }
     }
   </style>
 </head>
@@ -157,6 +155,7 @@
         <pre id="verify-text" class="blinking">
 Verifying your browser...
         </pre>
+        <!-- Progress Bar -->
         <div class="progress-bar-outer">
           <div class="progress-bar-inner" id="progress-bar"></div>
         </div>
@@ -168,11 +167,10 @@ Verifying your browser...
 
   <!-- INTERVIEW SCREEN -->
   <div class="interview-box" id="interview-box">
-    <div class="interview-title">Inside the Glitch: An Interview with SXMRXXT</div>
-    <div id="typewriter-container">
-      <div id="typewriter-container" style="max-height: 400px; overflow-y: auto;">
-  <div id="typewriter" class="typewriter"></div>
-</div>
+    <div class="interview-title">
+      Inside the Glitch: An Interview with SXMRXXT
+    </div>
+    <div id="typewriter" class="typewriter"></div>
   </div>
 
   <script>
@@ -180,7 +178,7 @@ Verifying your browser...
     const progressBar = document.getElementById('progress-bar');
     const progressPercent = document.getElementById('progress-percent');
     let prog = 0;
-    const duration = 10000;
+    const duration = 10000; // 10 sec
     const interval = 50;
     const totalSteps = duration / interval;
     let currentStep = 0;
@@ -189,61 +187,10 @@ Verifying your browser...
       prog = Math.min(100, Math.round((currentStep/totalSteps)*100));
       progressBar.style.width = prog + "%";
       progressPercent.textContent = prog + "%";
-      if (currentStep >= totalSteps) clearInterval(progressTimer);
-    }, interval);
-
-    // Interview lines
-    const interviewLines = [
-      "<span class='interviewer'>Interviewer:</span> What do you use to make music?",
-      "<span class='artist'>SXMRXXT:</span> <span class='highlight'>Maschine</span> to create grooves, loops, and sample-driven patterns",
-      "<span class='highlight'>Pro Tools</span> for recording vocals, mixing, and final output",
-      "",
-      "<span class='interviewer'>Interviewer:</span> How do you come up with ideas?",
-      "<span class='artist'>SXMRXXT:</span> I do not try to come up with ideas. I try to capture what I already feel but cannot explain.",
-      // (You can paste rest of your array here...)
-      "<span class='interviewer'>Interviewer:</span> If you could describe SXMRXXT in one word, what would it be?",
-      "<span class='artist'>SXMRXXT:</span> Obscured.",
-    ];
-
-    // Typewriter Logic
-    let currentLine = 0;
-    let currentChar = 0;
-    let output = "";
-    const typingSpeed = 35;
-    const linePause = 500;
-
-    function typeLine() {
-      const typewriterDiv = document.getElementById('typewriter');
-      const container = document.getElementById('typewriter-container');
-      
-      if (currentLine >= interviewLines.length) return;
-
-      let line = interviewLines[currentLine];
-      if (currentChar < line.length) {
-        output += line[currentChar];
-        typewriterDiv.innerHTML = output + '<span style="opacity:.6;">|</span>';
-        currentChar++;
-        container.scrollTop = container.scrollHeight; // Auto-scroll
-        setTimeout(typeLine, typingSpeed);
-      } else {
-        output += '<br>';
-        typewriterDiv.innerHTML = output;
-        container.scrollTop = container.scrollHeight; // Auto-scroll
-        currentLine++;
-        currentChar = 0;
-        setTimeout(typeLine, linePause);
+      if (currentStep >= totalSteps) {
+        clearInterval(progressTimer);
       }
-    }
-
-    // After progress bar completes
-    setTimeout(() => {
-      document.getElementById('verify-screen').style.display = 'none';
-      document.getElementById('interview-box').style.display = 'block';
-      typeLine();
-    }, duration + 300); // delay before starting interview
-  </script>
-</body>
-</html>
+    }, interval);
 
     // Interview lines (with color classes)
     const interviewLines = [
@@ -355,41 +302,38 @@ Verifying your browser...
       "<span class='artist'>SXMRXXT:</span> Fragmented."
     ];
 
-    <script>
-  // Typewriter Logic
-  let currentLine = 0;
-  let currentChar = 0;
-  let output = "";
-  const typingSpeed = 35;
-  const linePause = 500;
+    // Typewriter effect
+    let currentLine = 0;
+    let currentChar = 0;
+    let output = '';
+    const typingSpeed = 22;
+    const linePause = 350;
 
-  function typeLine() {
-    const typewriterDiv = document.getElementById('typewriter');
-    const container = document.getElementById('typewriter-container');
+    function typeLine() {
+      const typewriterDiv = document.getElementById('typewriter');
+      if (currentLine >= interviewLines.length) return;
 
-    if (currentLine >= interviewLines.length) return;
-
-    let line = interviewLines[currentLine];
-    if (currentChar < line.length) {
-      output += line[currentChar];
-      typewriterDiv.innerHTML = output + '<span style="opacity:.6;">|</span>';
-      currentChar++;
-      container.scrollTop = container.scrollHeight; // Auto-scroll
-      setTimeout(typeLine, typingSpeed);
-    } else {
-      output += '<br>';
-      typewriterDiv.innerHTML = output;
-      container.scrollTop = container.scrollHeight; // Auto-scroll
-      currentLine++;
-      currentChar = 0;
-      setTimeout(typeLine, linePause);
+      let line = interviewLines[currentLine];
+      if (currentChar < line.length) {
+        output += line[currentChar];
+        typewriterDiv.innerHTML = output + '<span style="opacity:.6;">|</span>';
+        currentChar++;
+        setTimeout(typeLine, typingSpeed);
+      } else {
+        output += '<br>';
+        typewriterDiv.innerHTML = output;
+        currentLine++;
+        currentChar = 0;
+        setTimeout(typeLine, linePause);
+      }
     }
-  }
 
-  // Start typing after 10s delay
-  setTimeout(() => {
-    document.getElementById('verify-screen').style.display = 'none';
-    document.getElementById('interview-box').style.display = 'block';
-    typeLine();
-  }, 10000); // 10 seconds
-</script>
+    // Switch to interview after 10s
+    setTimeout(() => {
+      document.getElementById('verify-screen').style.display = 'none';
+      document.getElementById('interview-box').style.display = 'block';
+      typeLine();
+    }, 10000);
+  </script>
+</body>
+</html>
