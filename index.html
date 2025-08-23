@@ -88,19 +88,19 @@
       100% { opacity: 1; }
     }
 .interview-box {
-  max-width: 630px;
-  width: 90vw;
+  max-width: 520px;
+  width: 88vw;
   position: fixed;
-  top: 12vh;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  padding: 20px;
-  background: #232323;
-  box-shadow: 0 4px 32px #0008;
+  transform: translate(-50%, -50%);
+  padding: 18px;
+  background: #161d23;
+  box-shadow: 0 0 40px #00ff2a30;
   border-radius: 8px;
   font-size: 1.13rem;
   letter-spacing: 0.02em;
-  color: #e0e0e0;
+  color: #00ff62;
   font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
   line-height: 1.6;
   display: none;
@@ -109,6 +109,7 @@
   box-sizing: border-box;
   z-index: 99;
 }
+
     .interview-title {
       text-align: center;
       font-size: 2.1rem;
@@ -146,23 +147,54 @@
     .highlight-protools { color: #ffe066; font-weight: bold; }
     .interviewer { color: #91f2c1; font-weight: bold; }
     .artist { color: #ffa1ff; font-weight: bold; }
-    @media (max-width: 600px) {
+@media (max-width: 600px) {
   .interview-box {
     width: 92vw;
-    top: 10vh;
-    padding: 18px 12px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .interview-title {
-    font-size: 1.2rem;
-  }
-  .typewriter {
+    max-height: 60vh;
     font-size: 0.98rem;
+    padding: 14px 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .interview-title {
+    font-size: 1.4rem;
+  }
+
+  .typewriter {
+    font-size: 0.95rem;
     padding-left: 10px;
   }
+
   .loader-container {
-    margin-top: 70px;
+    margin-top: 60px;
+    padding: 0 12px;
+  }
+
+  .progress-bar-outer {
+    max-width: 280px;
+    height: 13px;
+  }
+
+  .progress-percent {
+    font-size: 0.95rem;
+    margin-top: 6px;
+  }
+
+  .term-header {
+    font-size: 1rem;
+    padding: 14px 14px 10px 14px;
+  }
+
+  .term-body {
+    padding: 20px 14px 14px 14px;
+    font-size: 1rem;
+  }
+
+  .footer {
+    font-size: 0.95rem;
+    margin-top: 28px;
   }
 }
 
