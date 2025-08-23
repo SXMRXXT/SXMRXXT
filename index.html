@@ -2,328 +2,166 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Inside the Glitch: An Interview with SXMRXXT</title>
+  <title>SXMRXXT | Quantum AI Console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Quantum AI Console | Encrypted Logs">
   <style>
     body {
-      background: #181818;
-      color: #e0e0e0;
+      background: #101416;
+      color: #00ff62;
       font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
-      padding: 40px;
       min-height: 100vh;
       margin: 0;
+      padding: 0;
+      letter-spacing: 0.02em;
     }
-    .loader-container {
-      width: 100%;
-      max-width: 340px;
-      margin: 120px auto 0 auto;
-      text-align: center;
-    }
-    .circular-loader {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 10px auto;
+    .terminal {
+      background: #161d23;
+      border-radius: 14px;
+      box-shadow: 0 0 48px #00ff2a30, 0 0 0 #0000;
+      padding: 0 0 8px 0;
+      margin: 0 auto;
+      min-width: 350px;
+      max-width: 420px;
+      margin-top: 12vh;
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .circular-bg {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: rgba(80,255,220,0.07);
-      z-index: 0;
-    }
-    .circular-progress {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: conic-gradient(#91f2c1 0% 0%, #3fffe0 0% 100%);
-      z-index: 1;
-      transition: background 0.12s linear;
-    }
-    .circular-inner {
-      position: absolute;
-      width: 84px;
-      height: 84px;
-      top: 18px;
-      left: 18px;
-      border-radius: 50%;
-      background: #181818;
       z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 24px #18ffd966, 0 0 0 #0000;
     }
-    .circular-glow {
-      position: absolute;
-      width: 148px;
-      height: 148px;
-      left: -14px;
-      top: -14px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #91f2c144 0%, #18181800 70%);
-      z-index: 0;
-      animation: loader-glow 2s infinite alternate;
+    .term-header {
+      background: #162b1e;
+      color: #59ffae;
+      font-weight: bold;
+      font-size: 1.12rem;
+      padding: 18px 18px 13px 18px;
+      border-radius: 14px 14px 0 0;
+      border-bottom: 1px solid #00ff1a33;
+      letter-spacing: 0.04em;
     }
-    @keyframes loader-glow {
-      0% { box-shadow: 0 0 8px #91f2c1aa, 0 0 32px #3fffe044; }
-      100% { box-shadow: 0 0 32px #91f2c1ee, 0 0 80px #3fffe088; }
+    .term-body {
+      padding: 24px 18px 16px 18px;
+      font-size: 1.1rem;
     }
-    .circular-percentage {
-      font-size: 2.1rem;
-      color: #91f2c1;
+    .footer {
+      text-align: center;
+      margin-top: 34px;
+      color: #ff245b;
+      font-size: 1.03rem;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      letter-spacing: 0.02em;
+      text-shadow: 0 0 6px #ff245b21;
+    }
+    .headline {
+      color: #11fff4;
+      font-size: 1.18rem;
       font-weight: bold;
       letter-spacing: 0.04em;
-      z-index: 5;
-      position: relative;
     }
-    .loading-text {
-      margin-top: 16px;
-      font-size: 1.14rem;
-      color: #aaa;
-      letter-spacing: 0.03em;
-      font-family: inherit;
-      text-shadow: 0 2px 12px #2fffd1aa;
+    /* Progress bar style */
+    .progress-bar-outer {
+      width: 100%;
+      max-width: 320px;
+      margin: 22px auto 0 auto;
+      background: #0e1b11;
+      height: 15px;
+      border-radius: 9px;
+      box-shadow: 0 0 10px #00ff7720;
+      overflow: hidden;
+      border: 1.2px solid #20ffb8;
     }
-    /* Interview styles */
-    .interview-box {
-      max-width: 900px;
-      margin: 40px auto;
-      background: #232323;
-      box-shadow: 0 4px 32px #0008;
-      border-radius: 8px;
-      padding: 40px 40px 50px 40px;
-      font-size: 1.13rem;
-      letter-spacing: 0.02em;
-      color: #e0e0e0;
-      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
-      line-height: 1.6;
-      display: none;
+    .progress-bar-inner {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg,#06ff7d,#13fff0 90%);
+      transition: width 0.18s;
+      box-shadow: 0 0 8px #13fff0aa;
     }
-    .interview-title {
+    .progress-percent {
+      color: #11fff4;
+      font-size: 1.07rem;
+      margin-top: 7px;
       text-align: center;
-      font-size: 2rem;
-      margin-bottom: 1.5em;
       letter-spacing: 0.05em;
-      color: #91f2c1;
-      font-family: 'Fira Mono', monospace;
+      font-family: inherit;
+      text-shadow: 0 0 6px #13fff0aa;
+      font-weight: bold;
+      user-select: none;
     }
-    .typewriter {
-      white-space: pre-line;
-      border-left: 3px solid #91f2c1;
-      padding-left: 18px;
-      min-height: 250px;
-      font-size: 1.13rem;
-      background: transparent;
-      animation: glow-border 1.2s alternate infinite;
+    .blinking {
+      animation: blink-ani 1.35s steps(1) infinite;
     }
-    @keyframes glow-border {
-      0% { border-left-color: #91f2c1; }
-      100% { border-left-color: #3fffe0; }
+    @keyframes blink-ani {
+      0% { opacity: 1; }
+      50% { opacity: 0.30; }
+      100% { opacity: 1; }
     }
-    .highlight { color: #ffe066; font-weight: bold; }
-    .interviewer { color: #91f2c1; font-weight: bold; }
-    .artist { color: #ffa1ff; font-weight: bold; }
     @media (max-width: 600px) {
-      .interview-box { padding: 24px 8px; }
-      .interview-title { font-size: 1.2rem; }
-      .typewriter { font-size: 0.98rem; padding-left: 10px; }
-      .loader-container { margin-top: 70px; }
-      .circular-loader { width: 80px; height: 80px; }
-      .circular-inner { width: 54px; height: 54px; top: 13px; left: 13px;}
-      .circular-glow { width: 98px; height: 98px; left: -9px; top: -9px;}
-      .circular-percentage { font-size: 1.1rem; }
+      .terminal, .term-header { min-width: unset; width: 92vw; }
+      .term-body { font-size: 0.99rem; }
+      .footer { font-size: 0.95rem; }
+      .headline { font-size: 1.02rem; }
     }
   </style>
 </head>
 <body>
-  <!-- Circular Loader/Progress Bar -->
-  <div class="loader-container" id="loader-container">
-    <div class="circular-loader">
-      <div class="circular-glow"></div>
-      <div class="circular-bg"></div>
-      <div class="circular-progress" id="circular-progress"></div>
-      <div class="circular-inner">
-        <span class="circular-percentage" id="circular-percentage">0%</span>
+  <!-- VERIFY SCREEN -->
+  <div id="verify-screen">
+    <div class="terminal">
+      <div class="term-header">SXMRXXT :: Quantum AI Console</div>
+      <div class="term-body">
+        <pre id="verify-text" class="blinking">
+Verifying your browser...
+        </pre>
+        <!-- Progress Bar -->
+        <div class="progress-bar-outer">
+          <div class="progress-bar-inner" id="progress-bar"></div>
+        </div>
+        <div class="progress-percent" id="progress-percent">0%</div>
       </div>
     </div>
-    <div class="loading-text">Loading interview...</div>
+    <div class="footer">Private access only. Level 5 Clearance Required.</div>
   </div>
 
-  <!-- Interview Typewriter (Initially Hidden) -->
-  <div class="interview-box" id="interview-box">
-    <div class="interview-title">
-      Inside the Glitch: An Interview with SXMRXXT
+  <!-- MAIN CONTENT -->
+  <div id="main-content" style="display:none;">
+    <div class="terminal">
+      <div class="term-header">SXMRXXT :: Quantum AI Console</div>
+      <div class="term-body">
+        <pre>
+Initializing encrypted session with SXMRXXT...
+Access granted.
+
+<span class="headline">Quantum AI Console | Encrypted Logs</span>
+        </pre>
+      </div>
     </div>
-    <div id="typewriter" class="typewriter"></div>
+    <div class="footer">Private access only. Level 5 Clearance Required.</div>
   </div>
 
   <script>
-    // Circular Progress loader logic
-    const circle = document.getElementById("circular-progress");
-    const percent = document.getElementById("circular-percentage");
+    // Progress Bar Logic
+    const progressBar = document.getElementById('progress-bar');
+    const progressPercent = document.getElementById('progress-percent');
     let prog = 0;
     const duration = 10000; // 10 sec
-    const interval = 40;
+    const interval = 50;
     const totalSteps = duration / interval;
     let currentStep = 0;
     let progressTimer = setInterval(() => {
       currentStep++;
-      prog = Math.min(100, Math.round((currentStep / totalSteps) * 100));
-      percent.textContent = prog + "%";
-      // Animate conic-gradient
-      circle.style.background = `conic-gradient(#91f2c1 ${prog * 3.6}deg, #232323 ${prog * 3.6}deg 360deg)`;
+      prog = Math.min(100, Math.round((currentStep/totalSteps)*100));
+      progressBar.style.width = prog + "%";
+      progressPercent.textContent = prog + "%";
       if (currentStep >= totalSteps) {
         clearInterval(progressTimer);
-        document.getElementById("loader-container").style.display = "none";
-        showInterview();
       }
     }, interval);
 
-    // Interview typewriter logic
-    function showInterview() {
-      document.getElementById("interview-box").style.display = "block";
-      typeLine();
-    }
-
-    // Interview lines (full text)
-    const interviewLines = [
-      "<span class='interviewer'>Interviewer:</span> What do you use to make music?",
-      "<span class='artist'>SXMRXXT:</span> <span class='highlight'>Maschine</span> to create grooves, loops, and sample-driven patterns",
-      "<span class='highlight'>Pro Tools</span> for recording vocals, mixing, and final output",
-      "",
-      "<span class='interviewer'>Interviewer:</span> How do you come up with ideas?",
-      "<span class='artist'>SXMRXXT:</span> I do not try to come up with ideas. I try to capture what I already feel but cannot explain.",
-      "Most of my music starts with a mood. It is usually not a melody or a beat, but a strange emotional weight. It can be sadness, numbness, paranoia, or something I cannot name.",
-      "I take inspiration from dreams, especially nightmares. I keep a notebook near my bed and write things down before I forget them. I also get ideas from conversations I overhear, or emotions I feel when I am alone in public.",
-      "Sometimes I use broken audio, static noise, or distorted samples. They remind me of how certain thoughts sound inside my head.",
-      "I also revisit old memories. Many of them are blurry or unreliable. I twist them, reshape them, and turn them into lyrics or stories that feel more real than the truth.",
-      "When I make music, I start by building the sound world first. That might be ambient noise, voice recordings, or strange samples. I do not always write lyrics immediately. I wait until the sound feels like a space I understand. Then I add the words that fit.",
-      "In the end, I do not see it as making music. I see it as organizing the chaos in my head into something that can speak for me.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> Your name itself is a mystery. What does SXMRXXT mean?",
-      "<span class='artist'>SXMRXXT:</span> It is more than a name. It is a code. The X’s replace vowels to break the word like a glitch in a system. It reflects fragmented identity and hidden layers that run through everything I create. It is a tag, a cipher, and a mask.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> Your music and visuals use glitch and distortion heavily. Why are these themes so important?",
-      "<span class='artist'>SXMRXXT:</span> Glitches are not mistakes. They are disruptions that reveal hidden structures beneath the surface. Life, identity, and reality are not clean or linear. They are messy, corrupted, and full of noise and interference. Embracing that chaos lets us see the truth behind the polished surface.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> Many fans say your work is mysterious. Are there hidden messages or codes?",
-      "<span class='artist'>SXMRXXT:</span> Yes. Every track, visual, and piece of merch has layers. Binary codes, encrypted audio snippets, and visual puzzles are not gimmicks. They are invitations. If you pay attention and decode the signals, you become part of the story. The story is meant to be uncovered.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> How do you want your audience to connect with your art?",
-      "<span class='artist'>SXMRXXT:</span> I want them to question what they perceive. I want them to explore, decode, and maybe lose themselves a little. The digital and real should bleed into each other. Meaning should not be given but discovered.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> Your work explores identity and control in the digital age. Can you explain?",
-      "<span class='artist'>SXMRXXT:</span> We live in a time shaped by algorithms. Truth is fragmented by misinformation and constant noise. My work captures that fractured experience. Identities can be fluid, hidden, or lost in the digital ether. It is a critique and an exploration of how we find ourselves in the chaos.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> What is next for SXMRXXT?",
-      "<span class='artist'>SXMRXXT:</span> More immersion. I am exploring virtual and augmented reality. I want fans to live the experience, not just listen. Music is only one layer. There are stories, visuals, puzzles, and worlds to discover. The system is expanding.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> What about your fans? When did you first feel that connection starting?",
-      "<span class='artist'>SXMRXXT:</span> Fun fact is that I had no fans. Back in college, when I used to write and rap under this DoDo persona, just teenage musings, I used to call them Dodmirers, like DoDo plus admirers.",
-      "(laughs) Okay, what’s the question?",
-      "<span class='interviewer'>Interviewer:</span> I was just asking when that sense of audience really began for you...",
-      "<span class='artist'>SXMRXXT:</span> Yeah, yeah! You were asking about fans, right? Honestly, I think it started not with numbers or clout, but when someone decoded something, I hadn’t even pointed out. That’s when I knew that someone out there was really listening, not just hearing.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> If you could leave fans with one thought or question, what would it be?",
-      "<span class='artist'>SXMRXXT:</span> What cracks are you willing to explore? In glitches, silences, and static something real begins.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> What role does technology play in your music?",
-      "<span class='artist'>SXMRXXT:</span> Technology is more than a tool. It is a collaborator. The machines shape the sound and introduce unpredictability. Glitches, errors, and distortions become part of the art. I welcome imperfections because they reflect how life really feels. Life is fractured and flawed. Sometimes technology surprises me. Those surprises lead to directions I could not imagine.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> How do you approach lyrics?",
-      "<span class='artist'>SXMRXXT:</span> As I mentioned earlier, they come to me as fragments. They are pieces of memory, fleeting emotions, and half-remembered dreams. I do not write them all at once. They emerge slowly like a puzzle. The pieces only make sense within the soundscape. I use words that evoke feeling rather than clear meaning. Ambiguity invites listeners to bring their own stories.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> Do you consider your music political or social commentary?",
-      "<span class='artist'>SXMRXXT:</span> In some ways, yes. The world is overwhelmed by noise. Media, data, and conflicting voices create confusion. My music captures that feeling. It is not a protest or message. It is a reflection of digital age anxieties and fractures.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> What do you want listeners to take away from your music?",
-      "<span class='artist'>SXMRXXT:</span> I want them to feel seen in their confusion and complexity. Life is rarely simple or neat. If my music creates a space for people to confront their darker emotions safely, then it means something. Connection can happen through shared chaos.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> How do you balance control and chaos in your work?",
-      "<span class='artist'>SXMRXXT:</span> That balance is everything. I set the structure with beats and loops. But I leave room for chance and mistakes. The unexpected sparks new ideas. Chaos holds real emotion. Control only frames it.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> What is your vision for the future of SXMRXXT?",
-      "<span class='artist'>SXMRXXT:</span> I want to push boundaries between sound, image, and experience. I want to explore immersive technology. My goal is to create spaces where people enter my world. Music is only one layer. Visuals, interaction, and storytelling will come together. SXMRXXT will keep evolving.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> How do you deal with creative blocks?",
-      "<span class='artist'>SXMRXXT:</span> Creative blocks feel like static in my mind. When that happens, I stop forcing ideas. Instead, I listen to silence or random noise. Sometimes I walk alone without distractions. I let the mind wander without pressure. Inspiration often comes when I stop chasing it.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> What is your relationship with your fans?",
-      "<span class='artist'>SXMRXXT:</span> My fans are part of the story. I do not see them as just listeners. They are collaborators in decoding the work. I try to respond, share behind-the-scenes thoughts, and sometimes give exclusive content. The connection is real, raw, and personal. That keeps the energy alive.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> Why do you often use distorted sounds and broken audio?",
-      "<span class='artist'>SXMRXXT:</span> Distortion and broken sounds remind me of how thoughts can be tangled and unclear. They capture mental states like anxiety, confusion, or numbness. These sounds break the smooth surface and reveal something beneath. That is where the truth hides.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> What inspires your visual art and merchandise design?",
-      "<span class='artist'>SXMRXXT:</span> Visuals and merch are extensions of the music. They share the same themes of decay, fragmentation, and glitch. I draw from cyberpunk aesthetics, digital errors, and abstract textures. The goal is to create objects and images that feel like artifacts from a fractured world.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> How do dreams influence your creative process?",
-      "<span class='artist'>SXMRXXT:</span> Dreams are a gateway to strange emotions I cannot name when awake. Nightmares especially provide raw material for mood and texture. I keep a notebook by my bed to capture these fleeting images. Dreams mix with memory and reality. They shape the atmosphere of my work.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> What does success mean to you as an artist?",
-      "<span class='artist'>SXMRXXT:</span> Success is not about numbers or fame. It is about reaching those who understand the chaos I create. If even a few people feel less alone or more understood through my music, that is success. Creating an honest, shared space matters more than anything else.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> What draws you to the underground music scene rather than mainstream channels?",
-      "<span class='artist'>SXMRXXT:</span> The underground feels honest. It is where ideas are raw and not polished for mass appeal. I want to connect with people who seek something deeper, something that unsettles and questions. Mainstream often smooths out the rough edges I rely on.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> How do you choose which sounds or samples make it into your tracks?",
-      "<span class='artist'>SXMRXXT:</span> I listen for imperfections. Sounds that carry tension or unease catch my ear. Sometimes it is a static burst or a warped vocal. These elements add texture and mystery. They carry meaning beyond notes and rhythms.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> Is collaboration important to you? How do you approach it?",
-      "<span class='artist'>SXMRXXT:</span> Collaboration is like a conversation without words. I look for artists who share a similar vision but bring something unexpected. It is about exchanging energy and letting the work transform. I rarely try to control collaborators. I prefer to let things evolve naturally.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> What is the most challenging part of being SXMRXXT?",
-      "<span class='artist'>SXMRXXT:</span> Holding the balance between being understood and staying mysterious. I want listeners to feel something real but not to hand everything on a silver platter. Sometimes that means pushing people out of their comfort zones. That can be lonely.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> How do you decompress or recharge after intense creative sessions?",
-      "<span class='artist'>SXMRXXT:</span> I disconnect completely. No screens, no sound, just quiet or nature. Sometimes I meditate or walk until thoughts slow down. Creativity can be draining when it dives into dark places. Recharge is essential to keep going.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> Do you see SXMRXXT as a persona or an extension of yourself?",
-      "<span class='artist'>SXMRXXT:</span> It is both. A persona is a mask, a filter. But it also reveals deeper parts of me. SXMRXXT allows me to explore sides of identity that are fragmented or hidden. It is a space where contradictions can coexist.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> What role does silence play in your music?",
-      "<span class='artist'>SXMRXXT:</span> Silence is as important as sound. It gives space to breathe and to feel tension. Silence can unsettle as much as noise. It creates anticipation. Without silence, chaos loses its impact.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> How do you see the relationship between your music and your audience evolving?",
-      "<span class='artist'>SXMRXXT:</span> I want it to become more interactive and immersive. Music is no longer just something to listen to. It should be experienced as an environment. I want to invite listeners into my world, not just tell stories but let them live inside them.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> What has been a surprising lesson in your artistic journey so far?",
-      "<span class='artist'>SXMRXXT:</span> That vulnerability is strength. Showing raw, imperfect parts of myself has connected me with others in ways I did not expect. It is scary but necessary. Authenticity cannot be faked.",
-      "",
-      "<span class='interviewer'>Interviewer:</span> If you could describe SXMRXXT in one word, what would it be?",
-      "<span class='artist'>SXMRXXT:</span> Fragmented."
-    ];
-
-    // Typewriter effect settings
-    let currentLine = 0;
-    let currentChar = 0;
-    let output = '';
-    const typingSpeed = 22; // ms per character
-    const linePause = 350; // ms pause between lines
-
-    function typeLine() {
-      const typewriterDiv = document.getElementById('typewriter');
-      if (currentLine >= interviewLines.length) return;
-
-      let line = interviewLines[currentLine];
-      if (currentChar < line.length) {
-        output += line[currentChar];
-        typewriterDiv.innerHTML = output + '<span style="opacity:.6;">|</span>';
-        currentChar++;
-        setTimeout(typeLine, typingSpeed);
-      } else {
-        output += '<br>';
-        typewriterDiv.innerHTML = output;
-        currentLine++;
-        currentChar = 0;
-        setTimeout(typeLine, linePause);
-      }
-    }
+    // Switch screens after 10s
+    setTimeout(() => {
+      document.getElementById('verify-screen').style.display = 'none';
+      document.getElementById('main-content').style.display = 'flex';
+    }, 10000); // 10 seconds
   </script>
 </body>
 </html>
