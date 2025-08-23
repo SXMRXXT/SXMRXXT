@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@500&display=swap');
-
     html, body {
       margin: 0;
       padding: 0;
@@ -15,7 +14,6 @@
       font-family: 'Fira Mono', monospace;
       height: 100%;
     }
-
     .terminal {
       background: rgba(15,20,30,0.96);
       border: 2px solid #222;
@@ -29,7 +27,6 @@
       flex-direction: column;
       overflow: hidden;
     }
-
     .term-header {
       background: #14181f;
       color: #39ff14;
@@ -38,18 +35,15 @@
       border-bottom: 1px solid #222;
       letter-spacing: 1.5px;
     }
-
     .term-body {
       padding: 24px 18px;
       min-height: 120px;
     }
-
     #verify-text {
       text-align: center;
       font-size: 1.1rem;
       margin-bottom: 12px;
     }
-
     .progress-bar-outer {
       width: 100%;
       background: #0e1b11;
@@ -59,7 +53,6 @@
       overflow: hidden;
       border: 1.2px solid #20ffb8;
     }
-
     .progress-bar-inner {
       height: 100%;
       width: 0%;
@@ -67,7 +60,6 @@
       transition: width 0.18s;
       box-shadow: 0 0 8px #13fff0aa;
     }
-
     .progress-percent {
       color: #11fff4;
       font-size: 1.07rem;
@@ -76,7 +68,6 @@
       font-weight: bold;
       text-shadow: 0 0 6px #13fff0aa;
     }
-
     .footer {
       text-align: center;
       margin-top: 18px;
@@ -86,7 +77,6 @@
       font-family: 'Fira Mono', monospace;
       opacity: 0.87;
     }
-
     #typewriter {
       max-height: 300px;
       overflow-y: auto;
@@ -95,24 +85,11 @@
       line-height: 1.6;
       padding-right: 6px;
     }
-
     .blinking {
       animation: blinker 1s linear infinite;
     }
-
     @keyframes blinker {
       50% { opacity: 0.4; }
-    }
-
-    @media (max-width: 500px) {
-      .terminal {
-        width: 98vw;
-        font-size: 1rem;
-      }
-      .term-header, .term-body {
-        padding-left: 10px;
-        padding-right: 10px;
-      }
     }
   </style>
 </head>
@@ -144,13 +121,13 @@
   <script>
     const progressBar = document.getElementById('progress-bar');
     const progressPercent = document.getElementById('progress-percent');
+    const glitchSound = document.getElementById('glitch-sound');
+
     let prog = 0;
     const duration = 10000;
     const interval = 50;
     const totalSteps = duration / interval;
     let currentStep = 0;
-
-    const glitchSound = document.getElementById('glitch-sound');
 
     const progressTimer = setInterval(() => {
       currentStep++;
@@ -274,53 +251,7 @@
       "<span class='artist'>SXMRXXT:</span> Fragmented."
     ];
 
-    
-    const progressBar = document.getElementById('progress-bar');
-    const progressPercent = document.getElementById('progress-percent');
-    let prog = 0;
-    const duration = 10000;
-    const interval = 50;
-    const totalSteps = duration / interval;
-    let currentStep = 0;
-
-    const glitchSound = document.getElementById('glitch-sound');
-
-    const progressTimer = setInterval(() => {
-      currentStep++;
-      prog = Math.min(100, Math.round((currentStep / totalSteps) * 100));
-      progressBar.style.width = prog + "%";
-      progressPercent.textContent = prog + "%";
-      if (currentStep >= totalSteps) {
-        clearInterval(progressTimer);
-        document.getElementById('verify-screen').style.display = 'none';
-        document.getElementById('interview-screen').style.display = 'block';
-        typeLine();
-      }
-    }, interval);
-
-    const interviewLines = [
-      "Interviewer: What do you use to make music?",
-      "SXMRXXT: Maschine to create grooves, loops, and sample-driven patterns",
-      "Pro Tools for recording vocals, mixing, and final output",
-      "",
-      "Interviewer: How do you come up with ideas?",
-      "SXMRXXT: I do not try to come up with ideas. I try to capture what I already feel but cannot explain.",
-      "Most of my music starts with a mood. It is usually not a melody or a beat, but a strange emotional weight.",
-      "I take inspiration from dreams, especially nightmares...",
-      "In the end, I do not see it as making music. I see it as organizing the chaos in my head into something that can speak for me.",
-      "",
-      "Interviewer: What cracks are you willing to explore?",
-      "SXMRXXT: In glitches, silences, and static something real begins.",
-      "",
-      "Interviewer: What role does technology play in your music?",
-      "SXMRXXT: Technology is more than a tool. It is a collaborator. The machines shape the sound and introduce unpredictability.",
-      "Glitches, errors, and distortions become part of the art. I welcome imperfections because they reflect how life really feels.",
-      "",
-      "Interviewer: What does success mean to you?",
-      "SXMRXXT: Success is not about numbers or fame. It is about reaching those who understand the chaos I create."
-    ];
-
-    let currentLine = 0;
+let currentLine = 0;
     let currentChar = 0;
     let output = '';
     const typingSpeed = 22;
