@@ -14,41 +14,80 @@
     }
     .loader-container {
       width: 100%;
-      max-width: 520px;
+      max-width: 340px;
       margin: 120px auto 0 auto;
       text-align: center;
     }
-    .progress-bar-bg {
-      width: 100%;
-      height: 24px;
-      background: #222;
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 10px;
-      box-shadow: 0 4px 18px #000a;
+    .circular-loader {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 10px auto;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .progress-bar-fill {
-      background: linear-gradient(90deg, #91f2c1 0%, #3fffe0 100%);
-      height: 100%;
-      width: 0%;
-      transition: width 0.12s linear;
-      border-radius: 16px 0 0 16px;
+    .circular-bg {
       position: absolute;
-      left: 0; top: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba(80,255,220,0.07);
+      z-index: 0;
     }
-    .progress-percentage {
-      font-size: 1.12rem;
-      margin-top: 2px;
+    .circular-progress {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(#91f2c1 0% 0%, #3fffe0 0% 100%);
+      z-index: 1;
+      transition: background 0.12s linear;
+    }
+    .circular-inner {
+      position: absolute;
+      width: 84px;
+      height: 84px;
+      top: 18px;
+      left: 18px;
+      border-radius: 50%;
+      background: #181818;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 24px #18ffd966, 0 0 0 #0000;
+    }
+    .circular-glow {
+      position: absolute;
+      width: 148px;
+      height: 148px;
+      left: -14px;
+      top: -14px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #91f2c144 0%, #18181800 70%);
+      z-index: 0;
+      animation: loader-glow 2s infinite alternate;
+    }
+    @keyframes loader-glow {
+      0% { box-shadow: 0 0 8px #91f2c1aa, 0 0 32px #3fffe044; }
+      100% { box-shadow: 0 0 32px #91f2c1ee, 0 0 80px #3fffe088; }
+    }
+    .circular-percentage {
+      font-size: 2.1rem;
       color: #91f2c1;
       font-weight: bold;
+      letter-spacing: 0.04em;
+      z-index: 5;
+      position: relative;
     }
     .loading-text {
-      margin-top: 18px;
+      margin-top: 16px;
       font-size: 1.14rem;
       color: #aaa;
       letter-spacing: 0.03em;
       font-family: inherit;
+      text-shadow: 0 2px 12px #2fffd1aa;
     }
     /* Interview styles */
     .interview-box {
@@ -94,16 +133,24 @@
       .interview-title { font-size: 1.2rem; }
       .typewriter { font-size: 0.98rem; padding-left: 10px; }
       .loader-container { margin-top: 70px; }
+      .circular-loader { width: 80px; height: 80px; }
+      .circular-inner { width: 54px; height: 54px; top: 13px; left: 13px;}
+      .circular-glow { width: 98px; height: 98px; left: -9px; top: -9px;}
+      .circular-percentage { font-size: 1.1rem; }
     }
   </style>
 </head>
 <body>
-  <!-- Loader/Progress Bar -->
+  <!-- Circular Loader/Progress Bar -->
   <div class="loader-container" id="loader-container">
-    <div class="progress-bar-bg">
-      <div class="progress-bar-fill" id="progress-bar-fill"></div>
+    <div class="circular-loader">
+      <div class="circular-glow"></div>
+      <div class="circular-bg"></div>
+      <div class="circular-progress" id="circular-progress"></div>
+      <div class="circular-inner">
+        <span class="circular-percentage" id="circular-percentage">0%</span>
+      </div>
     </div>
-    <div class="progress-percentage" id="progress-percentage">0%</div>
     <div class="loading-text">Loading interview...</div>
   </div>
 
@@ -116,19 +163,20 @@
   </div>
 
   <script>
-    // Progress bar logic
-    const fill = document.getElementById("progress-bar-fill");
-    const percent = document.getElementById("progress-percentage");
+    // Circular Progress loader logic
+    const circle = document.getElementById("circular-progress");
+    const percent = document.getElementById("circular-percentage");
     let prog = 0;
     const duration = 10000; // 10 sec
-    const interval = 50;
+    const interval = 40;
     const totalSteps = duration / interval;
     let currentStep = 0;
     let progressTimer = setInterval(() => {
       currentStep++;
       prog = Math.min(100, Math.round((currentStep / totalSteps) * 100));
-      fill.style.width = prog + "%";
       percent.textContent = prog + "%";
+      // Animate conic-gradient
+      circle.style.background = `conic-gradient(#91f2c1 ${prog * 3.6}deg, #232323 ${prog * 3.6}deg 360deg)`;
       if (currentStep >= totalSteps) {
         clearInterval(progressTimer);
         document.getElementById("loader-container").style.display = "none";
