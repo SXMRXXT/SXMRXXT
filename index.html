@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SXMRXXT | Quantum AI Console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Quantum AI Console | Encrypted Logs">
+</head>
+<body>
+  <div id="verify-screen">
+    <div class="terminal">
+      <div class="term-header">SXMRXXT :: Quantum AI Console</div>
+      <div class="term-body">
+        <pre id="verify-text" class="blinking">
+Verifying your browser...
+        </pre>
+      </div>
+    </div>
+    <div class="footer">Private access only. Level 5 Clearance Required.</div>
+  </div>
+
+  <div id="main-content" style="display:none;">
+    <div class="terminal">
+      <div class="term-header">SXMRXXT :: Quantum AI Console</div>
+      <div class="term-body">
+        <pre>
+Initializing encrypted session with SXMRXXT...
+Access granted.
+
+<span class="headline">Quantum AI Console | Encrypted Logs</span>
+        </pre>
+      </div>
+    </div>
+    <div class="footer">Private access only. Level 5 Clearance Required.</div>
+  </div>
+  <script>
+    setTimeout(() => {
+      document.getElementById('verify-screen').style.display = 'none';
+      document.getElementById('main-content').style.display = 'flex';
+    }, 10000); // 10 seconds
+  </script>
+</body>
+</html>
