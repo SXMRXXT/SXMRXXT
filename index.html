@@ -6,20 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Quantum AI Console | Encrypted Logs">
   <style>
-    *, *::before, *::after {
-  box-sizing: inherit;
-}
-body {
-  background: #101416;
-  overflow: hidden;
-  color: #00ff62;
-  font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  letter-spacing: 0.02em;
-  box-sizing: border-box;
-}
+    body {
+      background: #101416;
+        overflow: hidden;
+      color: #00ff62;
+      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      letter-spacing: 0.02em;
+    }
     .terminal {
       background: #161d23;
       border-radius: 14px;
@@ -93,20 +89,15 @@ body {
       100% { opacity: 1; }
     }
     .interview-box {
-  max-width: 630px;
-  margin: 40px auto;
-  position: fixed;
+      max-width: 900px;
+      margin: 40px auto;
+        position: fixed;
   top: 12vh;
   left: 50%;
   transform: translateX(-50%);
   height: 76vh;
   overflow-y: auto;
   z-index: 99;
-  padding: 20px;
-  box-sizing: border-box;
-  background: #0f0f0f;
-  color: #00ff62;
-}
 
       background: #232323;
       box-shadow: 0 4px 32px #0008;
@@ -147,8 +138,6 @@ body {
       font-size: 1.13rem;
       background: transparent;
       animation: glow-border 1.2s alternate infinite;
-      max-height: 60vh;
-overflow-y: auto;
     }
     @keyframes glow-border {
       0% { border-left-color: #91f2c1; }
@@ -166,28 +155,21 @@ overflow-y: auto;
   background: #13fff0aa;
   border-radius: 3px;
 }
-@media (max-width: 480px) {
+
+/* Responsive tweaks for small screens */
+@media (max-width: 600px) {
   .interview-box {
-    position: fixed;
-    top: 10vh;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 92vw;
-    height: 76vh;
-    padding: 18px 12px;
-    overflow-y: auto;
-    box-sizing: border-box;
+    padding: 24px 8px;
   }
-}
   .interview-title {
-    font-size: 1.4rem;
-    text-align: center;
+    font-size: 1.2rem;
   }
   .typewriter {
-    font-size: 1rem;
-    padding-left: 12px;
-    max-height: 60vh;
-    overflow-y: auto;
+    font-size: 0.98rem;
+    padding-left: 10px;
+  }
+  .loader-container {
+    margin-top: 70px;
   }
 }
   </style>
