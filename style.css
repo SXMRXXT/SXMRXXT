@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@500&display=swap');
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #090c10;
+  color: #39ff14;
+  font-family: 'Fira Mono', monospace;
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.terminal {
+  background: rgba(15,20,30,0.96);
+  border: 2px solid #222;
+  box-shadow: 0 0 40px #39ff14a0;
+  border-radius: 8px;
+  max-width: 97vw;
+  width: 400px;
+  margin: 10px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.term-header {
+  background: #14181f;
+  color: #39ff14;
+  font-size: 1.1rem;
+  padding: 12px 18px 7px 18px;
+  border-bottom: 1px solid #222;
+  letter-spacing: 1.5px;
+}
+
+.term-body {
+  padding: 24px 18px 24px 18px;
+  min-height: 120px;
+}
+
+.headline {
+  color: #00ffe7;
+  font-size: 1.25rem;
+  font-weight: bold;
+  display: block;
+  margin-top: 20px;
+  letter-spacing: 1.2px;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 18px;
+  color: #ff003c;
+  font-size: 0.93rem;
+  letter-spacing: 1px;
+  font-family: 'Fira Mono', monospace;
+  opacity: 0.87;
+}
+
+.blinking {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% { opacity: 0.4; }
+}
+
+@media (max-width: 500px) {
+  .terminal {
+    width: 98vw;
+    font-size: 1rem;
+  }
+  .term-header, .term-body {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
