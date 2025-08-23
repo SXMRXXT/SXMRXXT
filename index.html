@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>SXMRXXT | Quantum AI Console</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
   <meta name="description" content="Quantum AI Console | Encrypted Logs">
   <style>
     body {
@@ -23,7 +22,7 @@
       padding: 0 0 8px 0;
       margin: 0 auto;
       min-width: 350px;
-      max-width: 420px;
+      max-width: 520px;
       margin-top: 12vh;
       position: relative;
       z-index: 2;
@@ -50,12 +49,6 @@
       font-family: 'Fira Mono', 'Consolas', monospace;
       letter-spacing: 0.02em;
       text-shadow: 0 0 6px #ff245b21;
-    }
-    .headline {
-      color: #11fff4;
-      font-size: 1.18rem;
-      font-weight: bold;
-      letter-spacing: 0.04em;
     }
     /* Progress bar style */
     .progress-bar-outer {
@@ -95,11 +88,50 @@
       50% { opacity: 0.30; }
       100% { opacity: 1; }
     }
+    /* Interview styles */
+    .interview-box {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #232323;
+      box-shadow: 0 4px 32px #0008;
+      border-radius: 8px;
+      padding: 40px 40px 50px 40px;
+      font-size: 1.13rem;
+      letter-spacing: 0.02em;
+      color: #e0e0e0;
+      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+      line-height: 1.6;
+      display: none;
+    }
+    .interview-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1.5em;
+      letter-spacing: 0.05em;
+      color: #91f2c1;
+      font-family: 'Fira Mono', monospace;
+    }
+    .typewriter {
+      white-space: pre-line;
+      border-left: 3px solid #91f2c1;
+      padding-left: 18px;
+      min-height: 250px;
+      font-size: 1.13rem;
+      background: transparent;
+      animation: glow-border 1.2s alternate infinite;
+    }
+    @keyframes glow-border {
+      0% { border-left-color: #91f2c1; }
+      100% { border-left-color: #3fffe0; }
+    }
+    .highlight { color: #ffe066; font-weight: bold; }
+    .interviewer { color: #91f2c1; font-weight: bold; }
+    .artist { color: #ffa1ff; font-weight: bold; }
     @media (max-width: 600px) {
-      .terminal, .term-header { min-width: unset; width: 92vw; }
-      .term-body { font-size: 0.99rem; }
-      .footer { font-size: 0.95rem; }
-      .headline { font-size: 1.02rem; }
+      .interview-box { padding: 24px 8px; }
+      .interview-title { font-size: 1.2rem; }
+      .typewriter { font-size: 0.98rem; padding-left: 10px; }
+      .loader-container { margin-top: 70px; }
     }
   </style>
 </head>
@@ -122,20 +154,12 @@ Verifying your browser...
     <div class="footer">Private access only. Level 5 Clearance Required.</div>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <div id="main-content" style="display:none;">
-    <div class="terminal">
-      <div class="term-header">SXMRXXT :: Quantum AI Console</div>
-      <div class="term-body">
-        <pre>
-Initializing encrypted session with SXMRXXT...
-Access granted.
-
-<span class="headline">Quantum AI Console | Encrypted Logs</span>
-        </pre>
-      </div>
+  <!-- INTERVIEW SCREEN -->
+  <div class="interview-box" id="interview-box">
+    <div class="interview-title">
+      Inside the Glitch: An Interview with SXMRXXT
     </div>
-    <div class="footer">Private access only. Level 5 Clearance Required.</div>
+    <div id="typewriter" class="typewriter"></div>
   </div>
 
   <script>
@@ -157,11 +181,51 @@ Access granted.
       }
     }, interval);
 
-    // Switch screens after 10s
+    // Interview lines (sample, put your full content here)
+    const interviewLines = [
+      "<span class='interviewer'>Interviewer:</span> What do you use to make music?",
+      "<span class='artist'>SXMRXXT:</span> <span class='highlight'>Maschine</span> to create grooves, loops, and sample-driven patterns",
+      "<span class='highlight'>Pro Tools</span> for recording vocals, mixing, and final output",
+      "",
+      "<span class='interviewer'>Interviewer:</span> How do you come up with ideas?",
+      "<span class='artist'>SXMRXXT:</span> I do not try to come up with ideas. I try to capture what I already feel but cannot explain.",
+      // ... (put the rest of your interview here)
+      "<span class='interviewer'>Interviewer:</span> If you could describe SXMRXXT in one word, what would it be?",
+      "<span class='artist'>SXMRXXT:</span> Fragmented."
+    ];
+
+    // Typewriter effect
+    let currentLine = 0;
+    let currentChar = 0;
+    let output = '';
+    const typingSpeed = 22;
+    const linePause = 350;
+
+    function typeLine() {
+      const typewriterDiv = document.getElementById('typewriter');
+      if (currentLine >= interviewLines.length) return;
+
+      let line = interviewLines[currentLine];
+      if (currentChar < line.length) {
+        output += line[currentChar];
+        typewriterDiv.innerHTML = output + '<span style="opacity:.6;">|</span>';
+        currentChar++;
+        setTimeout(typeLine, typingSpeed);
+      } else {
+        output += '<br>';
+        typewriterDiv.innerHTML = output;
+        currentLine++;
+        currentChar = 0;
+        setTimeout(typeLine, linePause);
+      }
+    }
+
+    // Switch to interview after 10s
     setTimeout(() => {
       document.getElementById('verify-screen').style.display = 'none';
-      document.getElementById('main-content').style.display = 'flex';
-    }, 10000); // 10 seconds
+      document.getElementById('interview-box').style.display = 'block';
+      typeLine();
+    }, 10000);
   </script>
 </body>
 </html>
