@@ -2,43 +2,191 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SXMRXXT | Quantum AI Console</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
-  <meta name="description" content="Quantum AI Console | Encrypted Logs">
+  <title>Inside the Glitch: An Interview with SXMRXXT</title>
+  <style>
+    body {
+      background: #181818;
+      color: #e0e0e0;
+      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+      padding: 40px;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .loader-container {
+      width: 100%;
+      max-width: 520px;
+      margin: 120px auto 0 auto;
+      text-align: center;
+    }
+    .progress-bar-bg {
+      width: 100%;
+      height: 24px;
+      background: #222;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 18px #000a;
+      position: relative;
+    }
+    .progress-bar-fill {
+      background: linear-gradient(90deg, #91f2c1 0%, #3fffe0 100%);
+      height: 100%;
+      width: 0%;
+      transition: width 0.12s linear;
+      border-radius: 16px 0 0 16px;
+      position: absolute;
+      left: 0; top: 0;
+    }
+    .progress-percentage {
+      font-size: 1.12rem;
+      margin-top: 2px;
+      color: #91f2c1;
+      font-weight: bold;
+    }
+    .loading-text {
+      margin-top: 18px;
+      font-size: 1.14rem;
+      color: #aaa;
+      letter-spacing: 0.03em;
+      font-family: inherit;
+    }
+    /* Interview styles */
+    .interview-box {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #232323;
+      box-shadow: 0 4px 32px #0008;
+      border-radius: 8px;
+      padding: 40px 40px 50px 40px;
+      font-size: 1.13rem;
+      letter-spacing: 0.02em;
+      color: #e0e0e0;
+      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+      line-height: 1.6;
+      display: none;
+    }
+    .interview-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1.5em;
+      letter-spacing: 0.05em;
+      color: #91f2c1;
+      font-family: 'Fira Mono', monospace;
+    }
+    .typewriter {
+      white-space: pre-line;
+      border-left: 3px solid #91f2c1;
+      padding-left: 18px;
+      min-height: 250px;
+      font-size: 1.13rem;
+      background: transparent;
+      animation: glow-border 1.2s alternate infinite;
+    }
+    @keyframes glow-border {
+      0% { border-left-color: #91f2c1; }
+      100% { border-left-color: #3fffe0; }
+    }
+    .highlight { color: #ffe066; font-weight: bold; }
+    .interviewer { color: #91f2c1; font-weight: bold; }
+    .artist { color: #ffa1ff; font-weight: bold; }
+    @media (max-width: 600px) {
+      .interview-box { padding: 24px 8px; }
+      .interview-title { font-size: 1.2rem; }
+      .typewriter { font-size: 0.98rem; padding-left: 10px; }
+      .loader-container { margin-top: 70px; }
+    }
+  </style>
 </head>
 <body>
-  <div id="verify-screen">
-    <div class="terminal">
-      <div class="term-header">SXMRXXT :: Quantum AI Console</div>
-      <div class="term-body">
-        <pre id="verify-text" class="blinking">
-Verifying your browser...
-        </pre>
-      </div>
+  <!-- Loader/Progress Bar -->
+  <div class="loader-container" id="loader-container">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-bar-fill"></div>
     </div>
-    <div class="footer">Private access only. Level 5 Clearance Required.</div>
+    <div class="progress-percentage" id="progress-percentage">0%</div>
+    <div class="loading-text">Loading interview...</div>
   </div>
 
-  <div id="main-content" style="display:none;">
-    <div class="terminal">
-      <div class="term-header">SXMRXXT :: Quantum AI Console</div>
-      <div class="term-body">
-        <pre>
-Initializing encrypted session with SXMRXXT...
-Access granted.
-
-<span class="headline">Quantum AI Console | Encrypted Logs</span>
-        </pre>
-      </div>
+  <!-- Interview Typewriter (Initially Hidden) -->
+  <div class="interview-box" id="interview-box">
+    <div class="interview-title">
+      Inside the Glitch: An Interview with SXMRXXT
     </div>
-    <div class="footer">Private access only. Level 5 Clearance Required.</div>
+    <div id="typewriter" class="typewriter"></div>
   </div>
+
   <script>
-    setTimeout(() => {
-      document.getElementById('verify-screen').style.display = 'none';
-      document.getElementById('main-content').style.display = 'flex';
-    }, 10000); // 10 seconds
+    // Progress bar logic
+    const fill = document.getElementById("progress-bar-fill");
+    const percent = document.getElementById("progress-percentage");
+    let prog = 0;
+    const duration = 10000; // 10 sec
+    const interval = 50;
+    const totalSteps = duration / interval;
+    let currentStep = 0;
+    let progressTimer = setInterval(() => {
+      currentStep++;
+      prog = Math.min(100, Math.round((currentStep / totalSteps) * 100));
+      fill.style.width = prog + "%";
+      percent.textContent = prog + "%";
+      if (currentStep >= totalSteps) {
+        clearInterval(progressTimer);
+        document.getElementById("loader-container").style.display = "none";
+        showInterview();
+      }
+    }, interval);
+
+    // Interview typewriter logic
+    function showInterview() {
+      document.getElementById("interview-box").style.display = "block";
+      typeLine();
+    }
+
+    // Interview lines (shortened for space, paste all lines here)
+    const interviewLines = [
+      "<span class='interviewer'>Interviewer:</span> What do you use to make music?",
+      "<span class='artist'>SXMRXXT:</span> <span class='highlight'>Maschine</span> to create grooves, loops, and sample-driven patterns",
+      "<span class='highlight'>Pro Tools</span> for recording vocals, mixing, and final output",
+      "",
+      "<span class='interviewer'>Interviewer:</span> How do you come up with ideas?",
+      "<span class='artist'>SXMRXXT:</span> I do not try to come up with ideas. I try to capture what I already feel but cannot explain.",
+      "Most of my music starts with a mood. It is usually not a melody or a beat, but a strange emotional weight. It can be sadness, numbness, paranoia, or something I cannot name.",
+      "I take inspiration from dreams, especially nightmares. I keep a notebook near my bed and write things down before I forget them. I also get ideas from conversations I overhear, or emotions I feel when I am alone in public.",
+      "Sometimes I use broken audio, static noise, or distorted samples. They remind me of how certain thoughts sound inside my head.",
+      "I also revisit old memories. Many of them are blurry or unreliable. I twist them, reshape them, and turn them into lyrics or stories that feel more real than the truth.",
+      "When I make music, I start by building the sound world first. That might be ambient noise, voice recordings, or strange samples. I do not always write lyrics immediately. I wait until the sound feels like a space I understand. Then I add the words that fit.",
+      "In the end, I do not see it as making music. I see it as organizing the chaos in my head into something that can speak for me.",
+      "",
+      // (Paste all remaining lines from the interview here!)
+      "<span class='interviewer'>Interviewer:</span> If you could describe SXMRXXT in one word, what would it be?",
+      "<span class='artist'>SXMRXXT:</span> Fragmented."
+    ];
+
+    // Typewriter effect settings
+    let currentLine = 0;
+    let currentChar = 0;
+    let output = '';
+    const typingSpeed = 22; // ms per character
+    const linePause = 350; // ms pause between lines
+
+    function typeLine() {
+      const typewriterDiv = document.getElementById('typewriter');
+      if (currentLine >= interviewLines.length) return;
+
+      let line = interviewLines[currentLine];
+      if (currentChar < line.length) {
+        output += line[currentChar];
+        typewriterDiv.innerHTML = output + '<span style="opacity:.6;">|</span>';
+        currentChar++;
+        setTimeout(typeLine, typingSpeed);
+      } else {
+        output += '<br>';
+        typewriterDiv.innerHTML = output;
+        currentLine++;
+        currentChar = 0;
+        setTimeout(typeLine, linePause);
+      }
+    }
   </script>
 </body>
 </html>
