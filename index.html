@@ -103,11 +103,23 @@
     }
     .interview-title {
       text-align: center;
-      font-size: 2rem;
+      font-size: 2.1rem;
       margin-bottom: 1.5em;
       letter-spacing: 0.05em;
-      color: #91f2c1;
       font-family: 'Fira Mono', monospace;
+      font-weight: bold;
+      /* gorgeous blue-pink-ish gradient */
+      background: linear-gradient(92deg, #1e88ff 0%, #8e3fff 50%, #ff2877 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      filter: drop-shadow(0 2px 18px #2779ffcc);
+      animation: titleglow 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes titleglow {
+      0% { filter: drop-shadow(0 2px 18px #2779ffcc); }
+      100% { filter: drop-shadow(0 2px 28px #ff2877cc); }
     }
     .typewriter {
       white-space: pre-line;
@@ -122,7 +134,8 @@
       0% { border-left-color: #91f2c1; }
       100% { border-left-color: #3fffe0; }
     }
-    .highlight { color: #ffe066; font-weight: bold; }
+    .highlight-maschine { color: #ffeb3b; background: #312e15; padding: 0 4px; border-radius: 3px; font-weight: 600; }
+    .highlight-protools { color: #29eaff; background: #1b2732; padding: 0 4px; border-radius: 3px; font-weight: 600; }
     .interviewer { color: #91f2c1; font-weight: bold; }
     .artist { color: #ffa1ff; font-weight: bold; }
     @media (max-width: 600px) {
@@ -179,11 +192,11 @@ Verifying your browser...
       }
     }, interval);
 
-    // Interview lines (each line as a string)
+    // Interview lines (with color classes)
     const interviewLines = [
       "<span class='interviewer'>Interviewer:</span> What do you use to make music?",
-      "<span class='artist'>SXMRXXT:</span> Maschine to create grooves, loops, and sample-driven patterns",
-      "Pro Tools for recording vocals, mixing, and final output",
+      "<span class='artist'>SXMRXXT:</span> <span class='highlight-maschine'>Maschine</span> to create grooves, loops, and sample-driven patterns",
+      "<span class='highlight-protools'>Pro Tools</span> for recording vocals, mixing, and final output",
       "",
       "<span class='interviewer'>Interviewer:</span> How do you come up with ideas?",
       "<span class='artist'>SXMRXXT:</span> I do not try to come up with ideas. I try to capture what I already feel but cannot explain.",
