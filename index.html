@@ -6,16 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Quantum AI Console | Encrypted Logs">
   <style>
+    *, *::before, *::after {
+  box-sizing: inherit;
+}
     body {
-      background: #101416;
-        overflow: hidden;
-      color: #00ff62;
-      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
-      letter-spacing: 0.02em;
-    }
+  background: #101416;
+  overflow: hidden;
+  color: #00ff62;
+  font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.02em;
+  box-sizing: border-box;
+}
     .terminal {
       background: #161d23;
       border-radius: 14px;
@@ -138,6 +142,8 @@
       font-size: 1.13rem;
       background: transparent;
       animation: glow-border 1.2s alternate infinite;
+      max-height: 60vh;
+overflow-y: auto;
     }
     @keyframes glow-border {
       0% { border-left-color: #91f2c1; }
@@ -156,20 +162,23 @@
   border-radius: 3px;
 }
 
-/* Responsive tweaks for small screens */
 @media (max-width: 600px) {
   .interview-box {
-    padding: 24px 8px;
+    padding: 16px 12px;
+    height: 78vh;
+    width: 92vw;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .interview-title {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
   .typewriter {
-    font-size: 0.98rem;
-    padding-left: 10px;
+    font-size: 1rem;
+    padding-left: 12px;
   }
   .loader-container {
-    margin-top: 70px;
+    margin-top: 60px;
   }
 }
   </style>
