@@ -4,52 +4,51 @@
   <meta charset="UTF-8">
   <title>SXMRXXT | Quantum AI Console</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Quantum AI Console | Encrypted Logs">
   <style>
     body {
       background: #101416;
       color: #00ff62;
       font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
-      min-height: 100vh;
       margin: 0;
       padding: 0;
       letter-spacing: 0.02em;
     }
+
     .terminal {
       background: #161d23;
       border-radius: 14px;
-      box-shadow: 0 0 48px #00ff2a30, 0 0 0 #0000;
+      box-shadow: 0 0 48px #00ff2a30;
       padding: 0 0 8px 0;
-      margin: 0 auto;
-      min-width: 350px;
+      margin: 12vh auto 0 auto;
       max-width: 520px;
-      margin-top: 12vh;
       position: relative;
       z-index: 2;
     }
+
     .term-header {
       background: #162b1e;
       color: #59ffae;
       font-weight: bold;
       font-size: 1.12rem;
-      padding: 18px 18px 13px 18px;
+      padding: 18px;
       border-radius: 14px 14px 0 0;
       border-bottom: 1px solid #00ff1a33;
       letter-spacing: 0.04em;
     }
+
     .term-body {
       padding: 24px 18px 16px 18px;
       font-size: 1.1rem;
     }
+
     .footer {
       text-align: center;
       margin-top: 34px;
       color: #ff245b;
       font-size: 1.03rem;
-      font-family: 'Fira Mono', 'Consolas', monospace;
-      letter-spacing: 0.02em;
       text-shadow: 0 0 6px #ff245b21;
     }
+
     .progress-bar-outer {
       width: 100%;
       max-width: 320px;
@@ -61,6 +60,7 @@
       overflow: hidden;
       border: 1.2px solid #20ffb8;
     }
+
     .progress-bar-inner {
       height: 100%;
       width: 0%;
@@ -68,151 +68,94 @@
       transition: width 0.18s;
       box-shadow: 0 0 8px #13fff0aa;
     }
+
     .progress-percent {
       color: #11fff4;
       font-size: 1.07rem;
       margin-top: 7px;
       text-align: center;
-      letter-spacing: 0.05em;
-      font-family: inherit;
-      text-shadow: 0 0 6px #13fff0aa;
       font-weight: bold;
-      user-select: none;
+      text-shadow: 0 0 6px #13fff0aa;
     }
+
     .blinking {
       animation: blink-ani 1.35s steps(1) infinite;
     }
+
     @keyframes blink-ani {
       0% { opacity: 1; }
-      50% { opacity: 0.30; }
+      50% { opacity: 0.3; }
       100% { opacity: 1; }
     }
-.interview-box {
-  max-width: 520px;
-  width: 88vw;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 18px;
-  background: #161d23;
-  box-shadow: 0 0 40px #00ff2a30;
-  border-radius: 8px;
-  font-size: 1.13rem;
-  letter-spacing: 0.02em;
-  color: #00ff62;
-  font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
-  line-height: 1.6;
-  display: none;
-  overflow-y: auto;
-  max-height: 80vh;
-  box-sizing: border-box;
-  z-index: 99;
-}
+
+    .interview-box {
+      max-width: 520px;
+      width: 88vw;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 18px;
+      background: #161d23;
+      box-shadow: 0 0 40px #00ff2a30;
+      border-radius: 8px;
+      font-size: 1.13rem;
+      color: #00ff62;
+      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+      line-height: 1.6;
+      display: none;
+      overflow-y: auto;
+      max-height: 80vh;
+      box-sizing: border-box;
+      z-index: 99;
+    }
 
     .interview-title {
       text-align: center;
       font-size: 2.1rem;
       margin-bottom: 1.5em;
-      letter-spacing: 0.05em;
-      font-family: 'Fira Mono', monospace;
-      font-weight: bold;
-      /* gorgeous blue-pink-ish gradient */
-      background: linear-gradient(92deg, #1e88ff 0%, #8e3fff 50%, #ff2877 100%);
+      background: linear-gradient(92deg, #1e88ff, #8e3fff, #ff2877);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-fill-color: transparent;
       filter: drop-shadow(0 2px 18px #2779ffcc);
       animation: titleglow 2.5s ease-in-out infinite alternate;
     }
+
     @keyframes titleglow {
       0% { filter: drop-shadow(0 2px 18px #2779ffcc); }
       100% { filter: drop-shadow(0 2px 28px #ff2877cc); }
     }
-    .typewriter {
-  white-space: pre-line;
-  border-left: 3px solid #13fff0;
-  padding-left: 18px;
-  font-size: 1.13rem;
-  background: transparent;
-  animation: glow-border 1.2s alternate infinite;
 
-  max-height: 60vh;
-  overflow-y: auto;
-}
+    .typewriter {
+      white-space: pre-line;
+      border-left: 3px solid #13fff0;
+      padding-left: 18px;
+      font-size: 1.13rem;
+      background: transparent;
+      animation: glow-border 1.2s alternate infinite;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
 
     @keyframes glow-border {
       0% { border-left-color: #91f2c1; }
       100% { border-left-color: #3fffe0; }
     }
+
     .highlight-maschine { color: #ffe066; font-weight: bold; }
     .highlight-protools { color: #ffe066; font-weight: bold; }
     .interviewer { color: #91f2c1; font-weight: bold; }
     .artist { color: #ffa1ff; font-weight: bold; }
-@media (max-width: 600px) {
-  .interview-box {
-    width: 92vw;
-    max-height: 60vh;
-    font-size: 0.98rem;
-    padding: 14px 10px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .interview-title {
-    font-size: 1.4rem;
-  }
-
-  .typewriter {
-    font-size: 0.95rem;
-    padding-left: 10px;
-  }
-
-  .loader-container {
-    margin-top: 60px;
-    padding: 0 12px;
-  }
-
-  .progress-bar-outer {
-    max-width: 280px;
-    height: 13px;
-  }
-
-  .progress-percent {
-    font-size: 0.95rem;
-    margin-top: 6px;
-  }
-
-  .term-header {
-    font-size: 1rem;
-    padding: 14px 14px 10px 14px;
-  }
-
-  .term-body {
-    padding: 20px 14px 14px 14px;
-    font-size: 1rem;
-  }
-
-  .footer {
-    font-size: 0.95rem;
-    margin-top: 28px;
-  }
-}
-
   </style>
 </head>
 <body>
+
   <!-- VERIFY SCREEN -->
   <div id="verify-screen">
     <div class="terminal">
       <div class="term-header">SXMRXXT :: Quantum AI Console</div>
       <div class="term-body">
-        <pre id="verify-text" class="blinking">
-Verifying your browser...
-        </pre>
-        <!-- Progress Bar -->
+        <pre id="verify-text" class="blinking">Verifying your browser...</pre>
         <div class="progress-bar-outer">
           <div class="progress-bar-inner" id="progress-bar"></div>
         </div>
@@ -224,60 +167,63 @@ Verifying your browser...
 
   <!-- INTERVIEW SCREEN -->
   <div class="interview-box" id="interview-box">
-    <div class="interview-title">
-      Inside the Glitch: An Interview with SXMRXXT
-    </div>
+    <div class="interview-title">Inside the Glitch: An Interview with SXMRXXT</div>
     <div id="typewriter" class="typewriter"></div>
   </div>
 
   <script>
     // Progress Bar Logic
-    // Interview lines (with color classes)
-const interviewLines = [
-  "<span class='interviewer'>Interviewer:</span> What do you use to make music?",
-  "<span class='artist'>SXMRXXT:</span> <span class='highlight-maschine'>Maschine</span> to create grooves, loops, and sample-driven patterns",
-  "<span class='artist'>SXMRXXT:</span> <span class='highlight-protools'>Pro Tools</span> for recording vocals, mixing, and final output",
-  "<span class='interviewer'>Interviewer:</span> What drives your sound?",
-  "<span class='artist'>SXMRXXT:</span> Glitch, mystery, and encrypted emotion.",
-  "<span class='interviewer'>Interviewer:</span> Final message?",
-  "<span class='artist'>SXMRXXT:</span> The console is alive. Listen closely."
-];
-
-// Show interview box and animate typewriter
-setTimeout(() => {
-  document.getElementById('verify-screen').style.display = 'none';
-  const interviewBox = document.getElementById('interview-box');
-  const typewriter = document.getElementById('typewriter');
-  interviewBox.style.display = 'block';
-
-  let i = 0;
-  const typeSpeed = 120;
-  function typeLine() {
-    if (i < interviewLines.length) {
-      typewriter.innerHTML += interviewLines[i] + "<br><br>";
-      typewriter.scrollTop = typewriter.scrollHeight; // auto-scroll
-      i++;
-      setTimeout(typeLine, typeSpeed);
-    }
-  }
-  typeLine();
-}, duration + 500); // wait for progress bar to finish
     const progressBar = document.getElementById('progress-bar');
     const progressPercent = document.getElementById('progress-percent');
     let prog = 0;
-    const duration = 10000; // 10 sec
+    const duration = 10000;
     const interval = 50;
     const totalSteps = duration / interval;
     let currentStep = 0;
     let progressTimer = setInterval(() => {
       currentStep++;
-      prog = Math.min(100, Math.round((currentStep/totalSteps)*100));
+      prog = Math.min(100, Math.round((currentStep / totalSteps) * 100));
       progressBar.style.width = prog + "%";
       progressPercent.textContent = prog + "%";
       if (currentStep >= totalSteps) {
         clearInterval(progressTimer);
       }
     }, interval);
+
+    // Interview lines
+    const interviewLines = [
+      "<span class='interviewer'>Interviewer:</span> What do you use to make music?",
+      "<span class='artist'>SXMRXXT:</span> <span class='highlight-maschine'>Maschine</span> to create grooves, loops, and sample-driven patterns",
+      "<span class='artist'>SXMRXXT:</span> <span class='highlight-protools'>Pro Tools</span> for recording vocals, mixing, and final output",
+      "<span class='interviewer'>Interviewer:</span> What drives your sound?",
+      "<span class='artist'>SXMRXXT:</span> Glitch, mystery, and encrypted emotion.",
+      "<span class='interviewer'>Interviewer:</span> Final message?",
+      "<span class='artist'>SXMRXXT:</span> The console is alive. Listen closely."
+    ];
+
+    // Show interview and animate typewriter
+    setTimeout(() => {
+      document.getElementById('verify-screen').style.display = 'none';
+      const interviewBox = document.getElementById('interview-box');
+      const typewriter = document.getElementById('typewriter');
+      interviewBox.style.display = 'block';
+
+      let i = 0;
+      const typeSpeed = 120;
+      function typeLine() {
+        if (i < interviewLines.length) {
+          typewriter.innerHTML += interviewLines[i] + "<br><br>";
+          typewriter.scrollTop = typewriter.scrollHeight;
+          i++;
+          setTimeout(typeLine, typeSpeed);
+        }
+      }
+      typeLine();
+    }, duration + 500);
+  </script>
+
+</body>
+</html>
 
     // Interview lines (with color classes)
     const interviewLines = [
